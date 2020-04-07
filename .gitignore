@@ -1,0 +1,6 @@
+Mac/BT-Link/blued.plist
+Mac/BT-Link/btkeys.reg
+Mac/Rime/luna_pinyin.userdb/*
+Mac/aria2/aria2.session
+*.swp
+.DS_Store
