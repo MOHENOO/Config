@@ -3,3 +3,4 @@ aria2/aria2.session
 .DS_Store
 rime/build/*
 rime/luna_pinyin.userdb/*
+rime/user.yaml
