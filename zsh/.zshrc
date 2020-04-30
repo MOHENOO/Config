@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -10,30 +17,17 @@ export LANG=en_US.UTF-8
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-prompt_zsh_showStatus () {
-    state=`osascript -e 'tell application "Spotify" to player state as string'`;
-    if [ $state = "playing" ]; then
-        artist=`osascript -e 'tell application "Spotify" to artist of current track as string'`;
-        track=`osascript -e 'tell application "Spotify" to name of current track as string'`;
+# function prompt_my_spotify () {
+#     state=`osascript -e 'tell application "Spotify" to player state as string'`;
+#     if [ $state = "playing" ]; then
+#         artist=`osascript -e 'tell application "Spotify" to artist of current track as string'`;
+#         track=`osascript -e 'tell application "Spotify" to name of current track as string'`;
 
-        echo -n "$artist - $track";
-    fi
-}
-ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs zsh_showStatus)
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
-# POWERLEVEL9K_DIR_DEFAULT_SUBFOLDER_FOREGROUND="black"
-# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="black"
-# POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="green"
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="black"
-# POWERLEVEL9K_DIR_HOME_FOREGROUND="black"
-# POWERLEVEL9K_DIR_HOME_BACKGROUND="green"
-# POWERLEVEL9K_TIME_FOREGROUND='black'
-# POWERLEVEL9K_TIME_BACKGROUND='green'
+#         p10k segment -f green -t "$artist - $track" 
+#     fi
+# }
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=my_spotify
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
@@ -86,9 +80,9 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git vi-mode thefuck osx autojump vscode zsh-syntax-highlighting
-)
+# plugins=(
+#     git vi-mode thefuck osx autojump vscode command-not-found safe-paste colored-man-pages
+# )
 # zsh-history-substring-search
 source $ZSH/oh-my-zsh.sh
 
@@ -120,7 +114,10 @@ eval $(thefuck --alias)
 export GOPATH=/Users/mohenoo/Development/go
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
-# export GOPROXY=https://goproxy.cn
+export GOINSECURE="*.ksyun.com"
+export GONOSUMDB="*.ksyun.com"
+export GOSUMDB="sum.golang.google.cn"
+export GOPROXY="https://goproxy.cn,direct"
 # export PATH=/usr/local/anaconda3/bin:$PATH
 # export PATH=/Users/mohenoo/Development/flutter/bin:$PATH
 # export JAVA_HOME=$(/usr/libexec/java_home)
@@ -137,8 +134,8 @@ export PATH=$PATH:/usr/local/mysql/bin
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=dark
@@ -176,8 +173,76 @@ kitty + complete setup zsh | source /dev/stdin
 
 #tmux
  if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-     # tmux attach -t default || tmux new -s terminal
+     # tmux attach -t default || cd ~ && tmux new -s terminal
      tmuxinator start terminal
  fi
 
  # tmuxinator start terminal
+
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# Make sure to use double quotes
+zplug "zsh-users/zsh-history-substring-search"
+
+# Grab binaries from GitHub Releases
+# and rename with the "rename-to:" tag
+zplug "junegunn/fzf-bin", \
+    from:gh-r, \
+    as:command, \
+    rename-to:fzf, \
+    use:"*darwin*amd64*"
+zplug "junegunn/fzf", use:"shell/*.zsh", defer:2
+
+# Supports oh-my-zsh plugins and the like
+zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/vi-mode",    from:oh-my-zsh
+zplug "plugins/thefuck",    from:oh-my-zsh
+zplug "plugins/osx",    from:oh-my-zsh
+zplug "plugins/vscode",    from:oh-my-zsh
+zplug "plugins/command-not-found",    from:oh-my-zsh
+zplug "plugins/safe-paste",    from:oh-my-zsh
+zplug "plugins/colored-man-pages",    from:oh-my-zsh
+
+# clipboard
+zplug "lib/clipboard", from:oh-my-zsh
+
+# A next-generation cd command with your interactive filter
+zplug "b4b4r07/enhancd", use:init.sh
+
+# Rename a command with the string captured with `use` tag
+zplug "b4b4r07/httpstat", \
+    as:command, \
+    use:'(*).sh', \
+    rename-to:'$1'
+
+# zsh 's theme
+zplug "romkatv/powerlevel10k", as:theme, depth:1
+
+# Set the priority when loading
+# e.g., zsh-syntax-highlighting must be loaded
+# after executing compinit command and sourcing other plugins
+# (If the defer tag is given 2 or above, run after compinit command)
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+# tmux's panes plugs
+zplug "greymd/tmux-xpanes"
+
+# Directory listings for zsh with git features
+zplug "supercrabtree/k"
+
+# ZSH plugin that reminds you to use existing aliases for commands you just typed
+zplug "MichaelAquilina/zsh-you-should-use"
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+# Then, source plugins and add commands to $PATH
+# zplug load --verbose
+zplug load
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
