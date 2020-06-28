@@ -112,18 +112,17 @@ alias vim=nvim
 # alias tmux="tmux -u"
 eval $(thefuck --alias)
 export GOPATH=/Users/mohenoo/Development/go
+export PYTHONPATH=/Users/mohenoo/Library/Python/2.7/bin
 export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$PATH
-export GOINSECURE="*.ksyun.com"
-export GONOSUMDB="*.ksyun.com"
-export GOSUMDB="sum.golang.google.cn"
-export GOPROXY="https://goproxy.cn,direct"
+export PATH=$PYTHONPATH:$GOBIN:$PATH
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+#export PATH=/Users/mohenoo/opt/miniconda2/bin:$PATH
 # export PATH=/usr/local/anaconda3/bin:$PATH
 # export PATH=/Users/mohenoo/Development/flutter/bin:$PATH
 # export JAVA_HOME=$(/usr/libexec/java_home)
 # export PATH=$JAVA_HOME/bin:$PATH
 # export ANDROID_HOME=/Users/mohenoo/Development/android/SDK
-export PATH=$PATH:/usr/local/mysql/bin
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -161,10 +160,6 @@ export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview '(highlight -O ansi -l {} 
 export FZF_CTRL_R_OPTS="--reverse --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_ALT_C_OPTS="--select-1 --exit-0 --preview 'tree -C {} | head -200'"
 
-#
-export PATH="/usr/local/opt/ncurses/bin:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-
 #kitty
 autoload -Uz compinit
 compinit
@@ -172,10 +167,10 @@ compinit
 kitty + complete setup zsh | source /dev/stdin
 
 #tmux
- if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-     # tmux attach -t default || cd ~ && tmux new -s terminal
-     tmuxinator start terminal
- fi
+ # if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+ #     # tmux attach -t default || cd ~ && tmux new -s terminal
+ #     tmuxinator start terminal
+ # fi
 
  # tmuxinator start terminal
 
@@ -246,3 +241,19 @@ zplug load
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/mohenoo/opt/anaconda2/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/mohenoo/opt/anaconda2/etc/profile.d/conda.sh" ]; then
+        . "/Users/mohenoo/opt/anaconda2/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/mohenoo/opt/anaconda2/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
