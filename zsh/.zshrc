@@ -108,7 +108,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # path
 # alias python=python3
 # alias pip=pip3
-alias vim=nvim
 # alias tmux="tmux -u"
 eval $(thefuck --alias)
 export GOPATH=/Users/mohenoo/Development/go
@@ -116,6 +115,7 @@ export PYTHONPATH=/Users/mohenoo/Library/Python/2.7/bin
 export GOBIN=$GOPATH/bin
 export PATH=$PYTHONPATH:$GOBIN:$PATH
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+alias vim=nvim
 #export PATH=/Users/mohenoo/opt/miniconda2/bin:$PATH
 # export PATH=/usr/local/anaconda3/bin:$PATH
 # export PATH=/Users/mohenoo/Development/flutter/bin:$PATH
@@ -177,6 +177,8 @@ kitty + complete setup zsh | source /dev/stdin
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+# Make vim can open file:number
+#zplug "nviennot/zsh-vim-plugin"
 # Make sure to use double quotes
 zplug "zsh-users/zsh-history-substring-search"
 
@@ -199,26 +201,33 @@ zplug "plugins/command-not-found",    from:oh-my-zsh
 zplug "plugins/safe-paste",    from:oh-my-zsh
 zplug "plugins/colored-man-pages",    from:oh-my-zsh
 
+# homebrew complete
+#zplug "zsh-users/zsh-completions"
+
+# zsh sub search in history
+#zplug "zsh-users/zsh-history-substring-search", use:"*.zsh"
+
 # clipboard
 zplug "lib/clipboard", from:oh-my-zsh
 
-# A next-generation cd command with your interactive filter
-zplug "b4b4r07/enhancd", use:init.sh
-
-# Rename a command with the string captured with `use` tag
-zplug "b4b4r07/httpstat", \
-    as:command, \
-    use:'(*).sh', \
-    rename-to:'$1'
-
 # zsh 's theme
 zplug "romkatv/powerlevel10k", as:theme, depth:1
+
+# zsh fzf
+zplug "Aloxaf/fzf-tab", use:"*.zsh", defer:2
+
+# zsh cd
+zplug "b4b4r07/enhancd", use:init.sh
+
+# zsh back cd
+zplug "Tarrasch/zsh-bd"
 
 # Set the priority when loading
 # e.g., zsh-syntax-highlighting must be loaded
 # after executing compinit command and sourcing other plugins
 # (If the defer tag is given 2 or above, run after compinit command)
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+# zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zdharma/fast-syntax-highlighting", defer:2
 
 # tmux's panes plugs
 zplug "greymd/tmux-xpanes"
@@ -256,4 +265,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+test -r "~/.dir_colors" && eval $(gdircolors ~/.dir_colors)
+# enable-fzf-tab
 
