@@ -1,0 +1,2 @@
+# Start tmux
+launch tmuxinator start terminal
