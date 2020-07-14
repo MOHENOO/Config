@@ -1,5 +1,6 @@
 # open terminal
-alt - return : /Applications/kitty.app/Contents/MacOS/kitty 
+alt - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance --directory $HOME 
+#--session $HOME/.config/kitty/session
 
 # focus window
 alt - h : yabai -m window --focus west

@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/mohenoo/.oh-my-zsh"
+export ZSH="/usr/local/opt/zplug/repos/robbyrussell/oh-my-zsh"
 export TERM="xterm-256color"
 # set language
 export LC_ALL=en_US.UTF-8  
@@ -116,12 +116,6 @@ export GOBIN=$GOPATH/bin
 export PATH=$PYTHONPATH:$GOBIN:$PATH
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 alias vim=nvim
-#export PATH=/Users/mohenoo/opt/miniconda2/bin:$PATH
-# export PATH=/usr/local/anaconda3/bin:$PATH
-# export PATH=/Users/mohenoo/Development/flutter/bin:$PATH
-# export JAVA_HOME=$(/usr/libexec/java_home)
-# export PATH=$JAVA_HOME/bin:$PATH
-# export ANDROID_HOME=/Users/mohenoo/Development/android/SDK
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -180,7 +174,8 @@ source $ZPLUG_HOME/init.zsh
 # Make vim can open file:number
 #zplug "nviennot/zsh-vim-plugin"
 # Make sure to use double quotes
-zplug "zsh-users/zsh-history-substring-search"
+# suggest like fish
+zplug "zsh-users/zsh-autosuggestions"
 
 # Grab binaries from GitHub Releases
 # and rename with the "rename-to:" tag
@@ -200,12 +195,13 @@ zplug "plugins/vscode",    from:oh-my-zsh
 zplug "plugins/command-not-found",    from:oh-my-zsh
 zplug "plugins/safe-paste",    from:oh-my-zsh
 zplug "plugins/colored-man-pages",    from:oh-my-zsh
+zplug "plugins/z",    from:oh-my-zsh
 
 # homebrew complete
-#zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-completions"
 
 # zsh sub search in history
-#zplug "zsh-users/zsh-history-substring-search", use:"*.zsh"
+zplug "zsh-users/zsh-history-substring-search", use:"*.zsh"
 
 # clipboard
 zplug "lib/clipboard", from:oh-my-zsh
@@ -251,20 +247,6 @@ zplug load
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/mohenoo/opt/anaconda2/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/mohenoo/opt/anaconda2/etc/profile.d/conda.sh" ]; then
-        . "/Users/mohenoo/opt/anaconda2/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/mohenoo/opt/anaconda2/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-test -r "~/.dir_colors" && eval $(gdircolors ~/.dir_colors)
-# enable-fzf-tab
+eval "$(pyenv init -)"
 
+eval "$(pyenv virtualenv-init -)"
