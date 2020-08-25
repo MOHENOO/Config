@@ -111,7 +111,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias tmux="tmux -u"
 eval $(thefuck --alias)
 export GOPATH=/Users/mohenoo/Development/go
-export PYTHONPATH=/Users/mohenoo/Library/Python/2.7/bin
 export GOBIN=$GOPATH/bin
 export PATH=$PYTHONPATH:$GOBIN:$PATH
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
@@ -175,7 +174,7 @@ source $ZPLUG_HOME/init.zsh
 #zplug "nviennot/zsh-vim-plugin"
 # Make sure to use double quotes
 # suggest like fish
-zplug "zsh-users/zsh-autosuggestions"
+# zplug "zsh-users/zsh-autosuggestions"
 
 # Grab binaries from GitHub Releases
 # and rename with the "rename-to:" tag
@@ -250,3 +249,8 @@ zplug load
 eval "$(pyenv init -)"
 
 eval "$(pyenv virtualenv-init -)"
+
+# export LDFLAGS="-L/usr/local/opt/llvm/lib"
+# export CPPFLAGS="-I/usr/local/opt/llvm/include"
+#export PATH="/usr/local/opt/llvm/bin:$PATH"
+# export CPATH=`xcrun --show-sdk-path`/usr/include

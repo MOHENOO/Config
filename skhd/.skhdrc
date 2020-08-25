@@ -1,5 +1,6 @@
 # open terminal
 alt - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance --directory $HOME 
+#alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 #--session $HOME/.config/kitty/session
 
 # focus window
