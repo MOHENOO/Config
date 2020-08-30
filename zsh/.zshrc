@@ -1,97 +1,6 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH="/usr/local/opt/zplug/repos/robbyrussell/oh-my-zsh"
-export TERM="xterm-256color"
 # set language
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# function prompt_my_spotify () {
-#     state=`osascript -e 'tell application "Spotify" to player state as string'`;
-#     if [ $state = "playing" ]; then
-#         artist=`osascript -e 'tell application "Spotify" to artist of current track as string'`;
-#         track=`osascript -e 'tell application "Spotify" to name of current track as string'`;
-
-#         p10k segment -f green -t "$artist - $track" 
-#     fi
-# }
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=my_spotify
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-# plugins=(
-#     git vi-mode thefuck osx autojump vscode command-not-found safe-paste colored-man-pages
-# )
-# zsh-history-substring-search
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -100,35 +9,23 @@ else
     export EDITOR='nvim'
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
 # path
 # alias python=python3
 # alias pip=pip3
 # alias tmux="tmux -u"
+alias ll="exa -alig"
 eval $(thefuck --alias)
 export GOPATH=/Users/mohenoo/Development/go
 export GOBIN=$GOPATH/bin
 export PATH=$PYTHONPATH:$GOBIN:$PATH
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+# export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 alias vim=nvim
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+#alias cat=bat
 
 #fzf
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=dark
 --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
@@ -159,98 +56,83 @@ compinit
 # # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 
-#tmux
- # if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
- #     # tmux attach -t default || cd ~ && tmux new -s terminal
- #     tmuxinator start terminal
- # fi
 
- # tmuxinator start terminal
-
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-
-# Make vim can open file:number
-#zplug "nviennot/zsh-vim-plugin"
-# Make sure to use double quotes
-# suggest like fish
-# zplug "zsh-users/zsh-autosuggestions"
-
-# Grab binaries from GitHub Releases
-# and rename with the "rename-to:" tag
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*darwin*amd64*"
-zplug "junegunn/fzf", use:"shell/*.zsh", defer:2
-
-# Supports oh-my-zsh plugins and the like
-zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/vi-mode",    from:oh-my-zsh
-zplug "plugins/thefuck",    from:oh-my-zsh
-zplug "plugins/osx",    from:oh-my-zsh
-zplug "plugins/vscode",    from:oh-my-zsh
-zplug "plugins/command-not-found",    from:oh-my-zsh
-zplug "plugins/safe-paste",    from:oh-my-zsh
-zplug "plugins/colored-man-pages",    from:oh-my-zsh
-zplug "plugins/z",    from:oh-my-zsh
-
-# homebrew complete
-zplug "zsh-users/zsh-completions"
-
-# zsh sub search in history
-zplug "zsh-users/zsh-history-substring-search", use:"*.zsh"
-
-# clipboard
-zplug "lib/clipboard", from:oh-my-zsh
-
-# zsh 's theme
-zplug "romkatv/powerlevel10k", as:theme, depth:1
-
-# zsh fzf
-zplug "Aloxaf/fzf-tab", use:"*.zsh", defer:2
-
-# zsh cd
-zplug "b4b4r07/enhancd", use:init.sh
-
-# zsh back cd
-zplug "Tarrasch/zsh-bd"
-
-# Set the priority when loading
-# e.g., zsh-syntax-highlighting must be loaded
-# after executing compinit command and sourcing other plugins
-# (If the defer tag is given 2 or above, run after compinit command)
-# zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zdharma/fast-syntax-highlighting", defer:2
-
-# tmux's panes plugs
-zplug "greymd/tmux-xpanes"
-
-# Directory listings for zsh with git features
-zplug "supercrabtree/k"
-
-# ZSH plugin that reminds you to use existing aliases for commands you just typed
-zplug "MichaelAquilina/zsh-you-should-use"
-
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
-# Then, source plugins and add commands to $PATH
-# zplug load --verbose
-zplug load
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+# zsh's prompt
+# zinit light denysdovhan/spaceship-prompt
+
+# OMZ
+zinit ice lucid wait="0" atload="zpcompinit; zpcdreplay"
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit snippet OMZ::lib/completion.zsh
+zinit snippet OMZ::lib/key-bindings.zsh
+zinit snippet OMZ::lib/history.zsh
+zinit snippet OMZ::lib/theme-and-appearance.zsh
+zinit snippet OMZ::lib/clipboard.zsh
+zinit snippet OMZ::lib/functions.zsh
+zinit snippet OMZ::plugins/git-auto-fetch/git-auto-fetch.plugin.zsh
+zinit snippet OMZ::plugins/vscode/vscode.plugin.zsh
+zplugin ice svn
+zplugin snippet OMZ::plugins/osx
+zinit snippet OMZ::plugins/safe-paste/safe-paste.plugin.zsh
+zinit snippet OMZ::plugins/thefuck/thefuck.plugin.zsh
+zinit snippet OMZ::plugins/tmux/tmux.plugin.zsh
+zinit snippet OMZ::plugins/tmuxinator/tmuxinator.plugin.zsh
+zinit snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
+zinit snippet OMZ::plugins/httpie/httpie.plugin.zsh
+zinit snippet OMZ::plugins/extract/extract.plugin.zsh
+# zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
+zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+
+zinit ice blockf
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-autosuggestions
+
+zinit light zdharma/fast-syntax-highlighting
+zinit light b4b4r07/enhancd
+export ENHANCD_FILTER=fzf-tmux
+
+zinit pack for fzf
+
+zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+
+zinit light greymd/tmux-xpanes
+zinit light supercrabtree/k
+zinit light MichaelAquilina/zsh-you-should-use
+zinit light mafredri/zsh-async
+
+# key mapping
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+### End of Zinit's installer chunk
+
+. /usr/local/opt/asdf/asdf.sh
 eval "$(pyenv init -)"
-
 eval "$(pyenv virtualenv-init -)"
-
-# export LDFLAGS="-L/usr/local/opt/llvm/lib"
-# export CPPFLAGS="-I/usr/local/opt/llvm/include"
-#export PATH="/usr/local/opt/llvm/bin:$PATH"
-# export CPATH=`xcrun --show-sdk-path`/usr/include
+eval "$(starship init zsh)"
+export PATH="/usr/local/opt/redis@4.0/bin:$PATH"
