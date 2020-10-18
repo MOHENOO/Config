@@ -1,0 +1,64 @@
+* mohenoo 's spacemacs
+
+** keymap
+
+**** emacs
+   c-f like vim's l
+   c-b like vim's h
+   c-n like vim's j
+   c-p like vim's k
+   m-f like vim's w
+   m-b like vim's b
+   c-v like vim's c-f
+   m-v like vim's c-b
+   c-l like combine vim's zz zt zb.
+   c-a like vim's 0
+   c-e like vim's $
+   m-< like vim's gg
+   m-> like vim's G
+   c-u {{number}} action like vim's {{number}} action
+   c-g like vim's ESC
+   c-x 1 like vim's c-w c-o
+   <DEL> like vim's x
+   c-d like vim's dh
+   m-<DEL> like vim's dw
+   m-d like vim's db
+   c-k like vim's d$
+   m-k like vim's das
+   c-<SPACE> like vim's vistual mode
+   c-w like vim's db
+   c-y like vim's p
+   c-/ like vim's u
+   c-x u like vim's undo tree
+   c-x c-f like vim's :e
+   c-x c-s like vim's :w
+   c-x c-b like vim's :buffers or :ls
+   c-x b {{buffer's name}} like vim's :buffer {{buffer's number}}
+
+** python
+
+#+BEGIN_SRC sh
+    pip install python-language-server pyls-isort \
+    flake8 autoflake "ptvsd>=4.2" importmagic epc 
+    pip3 install python-language-server pyls-isort pyls-mypy \
+    pyls-black flake8 autoflake "ptvsd>=4.2" importmagic epc 
+    npm install -g pyright
+#+END_SRC
+
+** golang
+
+#+BEGIN_SRC sh
+  GO111MODULE=on go get -v golang.org/x/tools/gopls@latest
+  GO111MODULE=on CGO_ENABLED=0 go get -v -trimpath -ldflags '-s -w' github.com/golangci/golangci-lint/cmd/golangci-lint
+  go get -u -v golang.org/x/tools/cmd/godoc
+  go get -u -v golang.org/x/tools/cmd/goimports
+  go get -u -v golang.org/x/tools/cmd/gorename
+  go get -u -v golang.org/x/tools/cmd/guru
+  go get -u -v github.com/cweill/gotests/...
+  go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
+  go get -u -v github.com/fatih/gomodifytags
+  go get -u -v github.com/godoctor/godoctor
+  go get -u -v github.com/haya14busa/gopkgs/cmd/gopkgs
+  go get -u -v github.com/josharian/impl
+  go get -u -v github.com/rogpeppe/godef
+#+END_SRC
