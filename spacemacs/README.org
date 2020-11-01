@@ -34,6 +34,9 @@
    c-x c-s like vim's :w
    c-x c-b like vim's :buffers or :ls
    c-x b {{buffer's name}} like vim's :buffer {{buffer's number}}
+   c-x c-c like vim's :q 
+   c-x 1 like vim's c-w c-o Delete all but one window
+	 c-x u like vim's u
 
 ** python
 

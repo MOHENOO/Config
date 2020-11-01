@@ -1,6 +1,0 @@
-# Rime user dictionary
-#@/db_name	chinese_contain_english.userdb
-#@/db_type	userdb
-#@/rime_version	1.5.3
-#@/tick	0
-#@/user_id	fedc3d7a-10a1-40a4-8722-dc6db483d2ef
