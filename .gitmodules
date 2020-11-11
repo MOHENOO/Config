@@ -2,3 +2,6 @@
 	path = nvim
 	url = https://github.com/MOHENOO/nvim
 	branch = master
+[submodule "rime-settings"]
+	path = rime-settings
+	url = https://github.com/MOHENOO/rime-settings
