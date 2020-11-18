@@ -15,13 +15,19 @@ fi
 # path
 # alias python=python3
 # alias pip=pip3
-# alias tmux="tmux -u"
+alias ec='emacsclient -t -a ""'
+alias tmux="tmux -u"
 alias ll="exa -alig"
+alias ls="exa"
 eval $(thefuck --alias)
 export GOPATH=/Users/mohenoo/Development/go
 export GOBIN=$GOPATH/bin
 export PATH=$PYTHONPATH:$GOBIN:$PATH
-# export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+export LDFLAGS=-L/usr/local/opt/openssl/lib
+export CPPFLAGS=-I/usr/local/opt/openssl/include
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+
 alias vim=nvim
 #alias cat=bat
 
@@ -51,10 +57,10 @@ export FZF_CTRL_R_OPTS="--reverse --preview 'echo {}' --preview-window down:3:hi
 export FZF_ALT_C_OPTS="--select-1 --exit-0 --preview 'tree -C {} | head -200'"
 
 #kitty
-autoload -Uz compinit
-compinit
-# # Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
+# autoload -Uz compinit
+# compinit
+# Completion for kitty
+# kitty + complete setup zsh | source /dev/stdin
 
 
 ### Added by Zinit's installer
@@ -98,7 +104,7 @@ zinit snippet OMZ::plugins/safe-paste/safe-paste.plugin.zsh
 zinit snippet OMZ::plugins/thefuck/thefuck.plugin.zsh
 zinit snippet OMZ::plugins/tmux/tmux.plugin.zsh
 zinit snippet OMZ::plugins/tmuxinator/tmuxinator.plugin.zsh
-zinit snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
+# zinit snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
 zinit snippet OMZ::plugins/httpie/httpie.plugin.zsh
 zinit snippet OMZ::plugins/extract/extract.plugin.zsh
 # zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
@@ -114,9 +120,9 @@ zinit light zdharma/fast-syntax-highlighting
 zinit light b4b4r07/enhancd
 export ENHANCD_FILTER=fzf-tmux
 
-zinit pack for fzf
+zinit pack"bgn-binary+keys" for fzf
 
-zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+# zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
 
 zinit light greymd/tmux-xpanes
 zinit light supercrabtree/k
@@ -132,7 +138,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 ### End of Zinit's installer chunk
 
 . /usr/local/opt/asdf/asdf.sh
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 eval "$(starship init zsh)"
 export PATH="/usr/local/opt/redis@4.0/bin:$PATH"

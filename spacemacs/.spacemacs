@@ -30,17 +30,20 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   '(
      (lsp :variables
           lsp-ui-doc-enable nil
           lsp-file-watch-threshold nil)
+     ;; gtags
+     games
      (python :variables
              python-backend 'lsp
              python-lsp-server 'pyright
-             python-format-on-save t
+             ;; python-format-on-save t
+             ;; python-backend 'anaconda
+             python-formatter 'yapf
              python-sort-imports-on-save t)
      tmux
-     json
      (json :variables
            json-fmt-tool 'web-beautify
            json-fmt-on-save t
@@ -59,7 +62,7 @@ values."
      helm
      (auto-completion :variables
                       auto-completion-idle-delay 0.0
-                      auto-completion-minimum-prefix-length 2
+                      auto-completion-minimum-prefix-length 1
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-use-company-box t
                       auto-completion-enable-help-tooltip t
@@ -68,13 +71,16 @@ values."
      emacs-lisp
      git
      chrome
+     (restclient :variables
+                 restclient-use-org t)
      dap
      (docker :variables
              docker-dockerfile-backend 'lsp)
      (markdown :variables
                markdown-live-preview-engine 'vmd
                markdown-mmm-auto-modes '("c" "c++" "python" "go" ("elisp" "emacs-lisp")))
-     org
+     (org :variables
+          org-enable-github-support t)
      ansible
      (yaml :variables
            yaml-enable-lsp t)
@@ -84,6 +90,7 @@ values."
      ;; spell-checking
      themes-megapack
      osx
+     chinese
      spotify
      multiple-cursors
      (treemacs :variables
@@ -96,7 +103,13 @@ values."
      (unicode-fonts :variables
                     unicode-fonts-force-multi-color-on-mac t
                     unicode-fonts-enable-ligatures t)
+     (geolocation :variables
+                  ;; geolocation-enable-automatic-theme-changer t
+                  geolocation-enable-location-service t
+                  geolocation-enable-weather-forecast t)
      syntax-checking
+     bm
+     imenu-list
      version-control
      )
    ;; List of additional packages that will be installed without being
@@ -281,7 +294,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -354,6 +367,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq configuration-layer--elpa-archives
+        '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+          ("org-cn"   . "http://elpa.zilongshanren.com/org/")
+          ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
   )
 
 (defun dotspacemacs/user-config ()
@@ -363,7 +380,60 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (xterm-mouse-mode -1)
+  (setq-default dotspacemacs-persistent-server t)
+  (setq-default dotspacemacs-server-socket-dir "~/.emacs/server")
+  (setq-default display-time-mode 1)
+  (setq sunshine-appid "5b3519d3a82ebd48d97322181d348192")
+  (setq sunshine-location "Beijing")
+  (setq sunshine-show-icons t)
+  (setq calendar-location-name "Beijing, CN"
+        calendar-latitude 39.9075
+        calendar-longitude 116.397)
+  (setq paradox-github-token "2ccf9e6de63e379e5e6947caac719b821c72c6d6")
+  ;; "Temporary alias for Emacs2
+  (defvaralias 'helm-c-yas-space-match-any-greedy 'helm-yas-space-match-any-greedy)
+  ;; (add-hook 'python-mode-hook 'anaconda-mode)
+  ;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+  ;; (setq-default evil-escape-key-sequence "jj")
+  ;; (use-package lsp-mode
+  ;;   :ensure t
+  ;;   :commands (lsp lsp-deferred)
+  ;;   :hook (go-mode . lsp-deferred))
+
+  ;; ;; Set up before-save hooks to format buffer and add/delete imports.
+  ;; ;; Make sure you don't have other gofmt/goimports hooks enabled.
+  ;; (defun lsp-go-install-save-hooks ()
+  ;;   (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  ;;   (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  ;; (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+  ;; ;; Optional - provides fancier overlays.
+  ;; (use-package lsp-ui
+  ;;   :ensure t
+  ;;   :commands lsp-ui-mode)
+
+  ;; ;; Company mode is a standard completion package that works well with lsp-mode.
+  ;; (use-package company
+  ;;   :ensure t
+  ;;   :config
+  ;;   ;; Optionally enable completion-as-you-type behavior.
+  ;;   (setq company-idle-delay 0)
+  ;;   (setq company-minimum-prefix-length 1))
+
+  ;; ;; Optional - provides snippet support.
+  ;; (use-package yasnippet
+  ;;   :ensure t
+  ;;   :commands yas-minor-mode
+  ;;   :hook (go-mode . yas-minor-mode))
+
+    (setq-default lsp-register-custom-settings
+          '(("gopls.completeUnimported" t t)
+            ("gopls.completionDocumentation" t t)
+            ("gopls.deepCompletion" t t)
+            ("gopls.staticcheck" t t)))
   )
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -393,7 +463,7 @@ This function is called at the very end of Spacemacs initialization."
  '(ansi-color-names-vector
    ["#bcbcbc" "#d70008" "#5faf00" "#875f00" "#268bd2" "#800080" "#008080" "#5f5f87"])
  '(custom-safe-themes
-   '("f2c35f8562f6a1e5b3f4c543d5ff8f24100fae1da29aeb1864bbc17758f52b70" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
+   '("8b58ef2d23b6d164988a607ee153fd2fa35ee33efc394281b1028c2797ddeebb" "f2c35f8562f6a1e5b3f4c543d5ff8f24100fae1da29aeb1864bbc17758f52b70" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
  '(evil-want-Y-yank-to-eol nil)
  '(helm-completion-style 'emacs)
  '(hl-todo-keyword-faces
@@ -413,12 +483,12 @@ This function is called at the very end of Spacemacs initialization."
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css counsel swiper ivy company-web web-completion-data add-node-modules-path yapfify xterm-color unfill smeargle shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup live-py-mode hy-mode dash-functional htmlize helm-pydoc helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help diff-hl cython-mode company-statistics company-go company-anaconda company auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete go-guru go-eldoc go-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
+   '(zones rime web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css counsel swiper ivy company-web web-completion-data add-node-modules-path yapfify xterm-color unfill smeargle shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup live-py-mode hy-mode dash-functional htmlize helm-pydoc helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help diff-hl cython-mode company-statistics company-go company-anaconda company auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete go-guru go-eldoc go-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
  '(pdf-view-midnight-colors '("#5f5f87" . "#ffffff")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:background nil)))))
 )
