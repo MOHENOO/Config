@@ -22,7 +22,8 @@ alias ls="exa"
 eval $(thefuck --alias)
 export GOPATH=/Users/mohenoo/Development/go
 export GOBIN=$GOPATH/bin
-export PATH=$PYTHONPATH:$GOBIN:$PATH
+# export JIRIPATH=/Users/mohenoo/fuchsia/.jiri_root/bin
+export PATH=$GOBIN:$PATH
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 export LDFLAGS=-L/usr/local/opt/openssl/lib
 export CPPFLAGS=-I/usr/local/opt/openssl/include
@@ -142,3 +143,5 @@ bindkey -M vicmd 'j' history-substring-search-down
 # eval "$(pyenv virtualenv-init -)"
 eval "$(starship init zsh)"
 export PATH="/usr/local/opt/redis@4.0/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+autoload -U compinit; compinit
