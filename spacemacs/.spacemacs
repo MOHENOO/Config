@@ -88,7 +88,12 @@ This function should only modify configuration layer settings."
                markdown-live-preview-engine 'vmd
                markdown-mmm-auto-modes '("c" "c++" "python" "go" ("elisp" "emacs-lisp")))
      (org :variables
-          org-enable-github-support t)
+          org-enable-github-support t
+          org-enable-hugo-support t
+          org-enable-trello-support t
+          org-enable-sticky-header t
+          org-enable-org-journal-support t)
+
      ansible
      (yaml :variables
            yaml-enable-lsp t)
@@ -595,8 +600,21 @@ before packages are loaded."
   (setq paradox-github-token "2ccf9e6de63e379e5e6947caac719b821c72c6d6")
   ;; "Temporary alias for Emacs2
   (defvaralias 'helm-c-yas-space-match-any-greedy 'helm-yas-space-match-any-greedy)
-  ;; (add-hook 'python-mode-hook 'anaconda-mode)
-  ;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+  (setq spaceline-org-clock-p t)
+  ;; (setq org-agenda-files '("~/org/inbox.org"
+  ;;                          "~/org/gtd.org"
+  ;;                          "~/org/tickler.org"))
+  ;; (setq org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
+  ;;                            ("~/org/someday.org" :level . 1)
+  ;;                            ("~/org/tickler.org" :maxlevel . 2)))
+  ;; (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/org/inbox.org" "Tasks") "* TODO %i%?")
+  ;;                               ("T" "Tickler" entry (file+headline "~/org/tickler.org" "Tickler") "* %i%? \n %U")))
+  (with-eval-after-load 'org-agenda
+    (require 'org-projectile)
+    (mapcar '(lambda (file)
+               (when (file-exists-p file)
+                 (push file org-agenda-files)))
+            (org-projectile-todo-files)))
   ;; (setq-default evil-escape-key-sequence "jj")
   ;; (use-package lsp-mode
   ;;   :ensure t
