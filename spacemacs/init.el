@@ -294,7 +294,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(all-the-icons :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -406,7 +406,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
@@ -568,6 +568,10 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq configuration-layer--elpa-archives
+      '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+        ("org-cn"   . "http://elpa.zilongshanren.com/org/")
+        ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
   )
 
 (defun dotspacemacs/user-load ()
@@ -601,6 +605,7 @@ before packages are loaded."
   ;; "Temporary alias for Emacs2
   (defvaralias 'helm-c-yas-space-match-any-greedy 'helm-yas-space-match-any-greedy)
   (setq spaceline-org-clock-p t)
+  (setq org-agenda-files '("~/org"))
   ;; (setq org-agenda-files '("~/org/inbox.org"
   ;;                          "~/org/gtd.org"
   ;;                          "~/org/tickler.org"))
@@ -609,12 +614,17 @@ before packages are loaded."
   ;;                            ("~/org/tickler.org" :maxlevel . 2)))
   ;; (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/org/inbox.org" "Tasks") "* TODO %i%?")
   ;;                               ("T" "Tickler" entry (file+headline "~/org/tickler.org" "Tickler") "* %i%? \n %U")))
-  (with-eval-after-load 'org-agenda
-    (require 'org-projectile)
-    (mapcar '(lambda (file)
-               (when (file-exists-p file)
-                 (push file org-agenda-files)))
-            (org-projectile-todo-files)))
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
+          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+           "* %?\nEntered on %U\n  %i\n  %a")))
+  ;; (with-eval-after-load 'org-agenda
+  ;;   (require 'org-projectile)
+  ;;   (mapcar '(lambda (file)
+  ;;              (when (file-exists-p file)
+  ;;                (push file org-agenda-files)))
+  ;;           (org-projectile-todo-files)))
   ;; (setq-default evil-escape-key-sequence "jj")
   ;; (use-package lsp-mode
   ;;   :ensure t
@@ -667,11 +677,14 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default)))
+   '("37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
+ '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+ '(package-selected-packages
+   '(zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify vterm volatile-highlights vmd-mode vi-tilde-fringe valign uuidgen use-package unicode-fonts unfill undo-tree underwater-theme ujelly-theme typit twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toc-org terminal-here tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunshine sunny-day-theme sudoku sublime-themes subatomic256-theme subatomic-theme string-inflection spotify sphinx-doc spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme reverse-theme reveal-in-osx-finder restclient-helm restart-emacs rebecca-theme rase rainbow-delimiters railscasts-theme pytest pyim pyenv-mode py-isort purple-haze-theme professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox pangu-spacing pacmacs ox-hugo ox-gfm overseer osx-trash osx-location osx-dictionary osx-clipboard orgit organic-green-theme org-trello org-superstar org-sticky-header org-rich-yank org-projectile org-present org-pomodoro org-mime org-journal org-download org-cliplink org-brain open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http nord-theme noctilux-theme naquadah-theme nameless mwim mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme mmm-mode minimal-theme material-theme markdown-toc majapahit-theme magit-svn magit-section magit-gitflow madhat2r-theme macrostep lush-theme lsp-ui lsp-python-ms lsp-pyright lsp-origami lorem-ipsum live-py-mode link-hint light-soap-theme launchctl kaolin-themes json-navigator jinja2-mode jbeans-theme jazz-theme ir-black-theme inkpot-theme indent-guide importmagic hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-spotify-plus helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-snippets go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gmail-message-mode gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gh-md gandalf-theme fuzzy forge font-lock+ flymd flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme find-by-pinyin-dired farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig edit-server dumb-jump dracula-theme dotenv-mode doom-themes dockerfile-mode docker django-theme dired-quick-sort diminish devdocs darktooth-theme darkokai-theme darkmine-theme darkburn-theme dap-mode dakrone-theme cython-mode cyberpunk-theme company-statistics company-restclient company-quickhelp company-go company-box company-ansible company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clean-aindent-mode chocolate-theme chinese-conv cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme browse-at-remote bm blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile atom-one-dark-theme apropospriate-theme anti-zenburn-theme ansible-doc ansible ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-pinyin ace-link ace-jump-helm-line ac-ispell 2048-game)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background nil)))))
+ )
 )
