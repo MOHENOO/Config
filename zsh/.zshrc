@@ -111,6 +111,8 @@ zinit snippet OMZ::plugins/extract/extract.plugin.zsh
 # zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+zinit snippet OMZ::plugins/minikube/minikube.plugin.zsh
 
 zinit ice blockf
 zinit light zsh-users/zsh-completions
@@ -126,7 +128,7 @@ zinit pack"bgn-binary+keys" for fzf
 # zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
 
 zinit light greymd/tmux-xpanes
-zinit light supercrabtree/k
+# zinit light supercrabtree/k
 zinit light MichaelAquilina/zsh-you-should-use
 zinit light mafredri/zsh-async
 
@@ -145,3 +147,13 @@ eval "$(starship init zsh)"
 export PATH="/usr/local/opt/redis@4.0/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 autoload -U compinit; compinit
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+# >>>> Vagrant command completion (start)
+fpath=(/opt/vagrant/embedded/gems/2.2.14/gems/vagrant-2.2.14/contrib/zsh $fpath)
+compinit
+# <<<<  Vagrant command completion (end)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

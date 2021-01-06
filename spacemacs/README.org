@@ -65,3 +65,9 @@
   go get -u -v github.com/josharian/impl
   go get -u -v github.com/rogpeppe/godef
 #+END_SRC
+
+** yaml
+
+#+begin_src shell
+npm i -g yaml-language-server
+#+end_src

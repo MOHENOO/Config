@@ -1,5 +1,6 @@
 # open terminal
-ctrl + alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+#ctrl + alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+ctrl + alt - return : open -na /Applications/iTerm.app/Contents/MacOS/iTerm2
 
 # focus window
 ctrl + alt - h : yabai -m window --focus west
