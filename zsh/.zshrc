@@ -21,12 +21,6 @@ fi
 export GOPATH=$HOME/Development/go
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
-# openssl
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-export LDFLAGS=-L/usr/local/opt/openssl/lib
-export CPPFLAGS=-I/usr/local/opt/openssl/include
-export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
-
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -61,9 +55,6 @@ zinit snippet OMZ::plugins/extract/extract.plugin.zsh
 zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
-# OSX
-zinit ice svn
-zinit snippet OMZ::plugins/osx
 
 zinit light zsh-users/zsh-history-substring-search
 bindkey '^[[A' history-substring-search-up
@@ -130,20 +121,6 @@ zinit ice lucid wait="0"
 zinit pack"default+keys" for fzf
 ### End of Zinit's installer chunk
 
-. /usr/local/opt/asdf/asdf.sh
+. $HOME/.asdf/asdf.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-
-# >>>> Vagrant command completion (start)
-fpath=(/opt/vagrant/embedded/gems/2.2.14/gems/vagrant-2.2.14/contrib/zsh $fpath)
-# <<<<  Vagrant command completion (end)
-
-
-#kitty
-autoload -Uz compinit
-compinit
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
