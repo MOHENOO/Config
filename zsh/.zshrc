@@ -1,27 +1,3 @@
-####################################### alias ############################################
-alias ec='emacsclient -t -a ""'
-alias tmux="tmux -u"
-alias ll="exa -alig"
-alias ls="exa"
-alias vim=nvim
-alias cat=bat
-
-####################################### export ###############################################
-# set language
-export LC_ALL=en_US.UTF-8  
-export LANG=en_US.UTF-8
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nvim'
-fi
-
-# eval $(thefuck --alias)
-export GOPATH=$HOME/Development/go
-export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$PATH
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
@@ -98,14 +74,14 @@ export FZF_ALT_C_OPTS="--select-1 --exit-0 --preview 'tree -C {} | head -200'"
 
 ################################ Turbo Mode ############################
 
-zinit ice wait"0c" lucid reset \
-    atclone"local P=${${(M)OSTYPE:#*darwin*}:+g}
-            \${P}sed -i \
-            '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
-            \${P}dircolors -b LS_COLORS > c.zsh" \
-    atpull'%atclone' pick"c.zsh" nocompile'!' \
-    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-zinit light trapd00r/LS_COLORS
+# zinit ice wait"0c" lucid reset \
+#     atclone"local P=${${(M)OSTYPE:#*darwin*}:+g}
+#             \${P}sed -i \
+#             '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
+#             \${P}dircolors -b LS_COLORS > c.zsh" \
+#     atpull'%atclone' pick"c.zsh" nocompile'!' \
+#     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+# zinit light trapd00r/LS_COLORS
 
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
@@ -118,9 +94,33 @@ zinit wait lucid light-mode for \
 zinit light zinit-zsh/z-a-bin-gem-node
 zinit light zinit-zsh/z-a-patch-dl
 zinit ice lucid wait="0"
-zinit pack"default+keys" for fzf
+zinit pack for fzf
 ### End of Zinit's installer chunk
 
 . $HOME/.asdf/asdf.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
+####################################### alias ############################################
+alias ec='emacsclient -t -a ""'
+alias tmux="tmux -u"
+alias ll="exa -alig --icons"
+alias ls="exa --icons"
+alias vim=nvim
+# alias cat=bat
+
+####################################### export ###############################################
+# set language
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='vim'
+else
+    export EDITOR='nvim'
+fi
+
+# eval $(thefuck --alias)
+export GOPATH=$HOME/Development/go
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$PATH
+
