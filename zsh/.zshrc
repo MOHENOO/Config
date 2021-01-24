@@ -1,33 +1,3 @@
-####################################### alias ############################################
-alias ec='emacsclient -t -a ""'
-alias tmux="tmux -u"
-alias ll="exa -alig"
-alias ls="exa"
-alias vim=nvim
-alias cat=bat
-
-####################################### export ###############################################
-# set language
-export LC_ALL=en_US.UTF-8  
-export LANG=en_US.UTF-8
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nvim'
-fi
-
-# eval $(thefuck --alias)
-export GOPATH=$HOME/Development/go
-export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$PATH
-# openssl
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-export LDFLAGS=-L/usr/local/opt/openssl/lib
-export CPPFLAGS=-I/usr/local/opt/openssl/include
-export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
-
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
@@ -107,14 +77,14 @@ export FZF_ALT_C_OPTS="--select-1 --exit-0 --preview 'tree -C {} | head -200'"
 
 ################################ Turbo Mode ############################
 
-zinit ice wait"0c" lucid reset \
-    atclone"local P=${${(M)OSTYPE:#*darwin*}:+g}
-            \${P}sed -i \
-            '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
-            \${P}dircolors -b LS_COLORS > c.zsh" \
-    atpull'%atclone' pick"c.zsh" nocompile'!' \
-    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-zinit light trapd00r/LS_COLORS
+# zinit ice wait"0c" lucid reset \
+#     atclone"local P=${${(M)OSTYPE:#*darwin*}:+g}
+#             \${P}sed -i \
+#             '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
+#             \${P}dircolors -b LS_COLORS > c.zsh" \
+#     atpull'%atclone' pick"c.zsh" nocompile'!' \
+#     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+# zinit light trapd00r/LS_COLORS
 
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
@@ -147,3 +117,35 @@ autoload -Uz compinit
 compinit
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
+
+####################################### alias ############################################
+alias ec='emacsclient -t -a ""'
+alias tmux="tmux -u"
+alias ll="exa -alig --icons"
+alias ls="exa --icons"
+alias vim=nvim
+# alias cat=bat
+alias ssh=zssh
+
+####################################### export ###############################################
+# set language
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='vim'
+else
+    export EDITOR='nvim'
+fi
+
+# eval $(thefuck --alias)
+export GOPATH=$HOME/Development/go
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$PATH:/Users/mohenoo/.asdf/installs/nodejs/15.2.0/.npm/bin
+# openssl
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+export LDFLAGS=-L/usr/local/opt/openssl/lib
+export CPPFLAGS=-I/usr/local/opt/openssl/include
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+
+
