@@ -620,7 +620,8 @@ before packages are loaded."
            "* %?\nEntered on %U\n  %i\n  %a")))
   (setq org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
                              ("~/org/someday.org" :level . 1)
-                             ("~/org/tickler.org" :maxlevel . 2)))
+                             ("~/org/tickler.org" :maxlevel . 2)
+                             ("~/org/done.org" :maxlevel . 0)))
   (setq org-todo-keywords
         '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")
           (sequence "REPORT(r!)" "BUG(b@/!)" "KNOWNCAUSE(k!)" "|" "FIXED(f@)")))
