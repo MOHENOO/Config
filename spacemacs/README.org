@@ -71,3 +71,11 @@
 #+begin_src shell
 npm i -g yaml-language-server
 #+end_src
+
+** rust
+#+begin_src shell
+cargo install cargo-edit
+cargo install cargo-audit
+rustup component add rustfmt
+rustup component add clippy
+#+end_src

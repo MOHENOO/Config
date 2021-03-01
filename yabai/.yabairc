@@ -66,6 +66,6 @@ yabai -m config window_gap                   10
 yabai -m rule --add app="^uTools$" manage=off
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^网易MuMu$" manage=off
-yabai -m rule --add app="^Emacs$" manage=off
+# yabai -m rule --add app="^Emacs$" manage=off
 
 echo "yabai configuration loaded.."

@@ -35,21 +35,22 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-     ;; `M-m f e R' (Emacs style) to install them.
+     ;; `M-m f e R' (Emacs sty
      ;; ----------------------------------------------------------------
    '(
      (lsp :variables
+          lsp-rust-server 'rust-analyzer
+          lsp-rust-analyzer-server-display-inlay-hints t
           lsp-lens-enable t
           lsp-ui-doc-enable nil
           lsp-enable-semantic-highlighting t
           lsp-file-watch-threshold 10000)
-     ;; gtags
      games
      (python :variables
-             ;; python-backend 'lsp
-             ;; python-lsp-server 'pyright
+             python-backend 'lsp
+             python-lsp-server 'pyright
              ;; python-format-on-save t
-             python-backend 'anaconda
+             ;; python-backend 'anaconda
              python-formatter 'yapf
              python-sort-imports-on-save t)
      tmux
@@ -63,10 +64,10 @@ This function should only modify configuration layer settings."
          go-format-before-save t
          gofmt-command "goimports"
          go-use-golangci-lint t)
-     ;; auto-completion
-     ;; better-defaults
+     (rust :variables
+           rust-backend 'lsp
+           rust-format-on-save t)
      emacs-lisp
-     ;; git
      helm
      (auto-completion :variables
                       auto-completion-idle-delay 0.0
@@ -406,7 +407,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
@@ -568,10 +569,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq configuration-layer--elpa-archives
-      '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-        ("org-cn"   . "http://elpa.zilongshanren.com/org/")
-        ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
   )
 
 (defun dotspacemacs/user-load ()
@@ -579,10 +576,10 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-  (setq configuration-layer--elpa-archives
-        '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-          ("org-cn"   . "http://elpa.zilongshanren.com/org/")
-          ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
+  ; (setq configuration-layer--elpa-archives
+  ;       '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+  ;         ("org-cn"   . "http://elpa.zilongshanren.com/org/")
+  ;         ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
   )
 
 (defun dotspacemacs/user-config ()
@@ -591,7 +588,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (global-git-commit-mode t)
   (xterm-mouse-mode -1)
   (setq-default dotspacemacs-persistent-server t)
   (setq-default dotspacemacs-server-socket-dir "~/.emacs/server")
@@ -620,8 +616,7 @@ before packages are loaded."
            "* %?\nEntered on %U\n  %i\n  %a")))
   (setq org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
                              ("~/org/someday.org" :level . 1)
-                             ("~/org/tickler.org" :maxlevel . 2)
-                             ("~/org/done.org" :maxlevel . 0)))
+                             ("~/org/tickler.org" :maxlevel . 2)))
   (setq org-todo-keywords
         '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")
           (sequence "REPORT(r!)" "BUG(b@/!)" "KNOWNCAUSE(k!)" "|" "FIXED(f@)")))
@@ -653,12 +648,15 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
+   '("e6df46d5085fde0ad56a46ef69ebb388193080cc9819e2d6024c9c6e27388ba9" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
+ '(evil-collection-calendar-want-org-bindings t)
+ '(evil-vsplit-window-right t)
  '(evil-want-Y-yank-to-eol nil)
  '(flycheck-checker-error-threshold 1000)
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
-   '(rainbow-fart zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify vterm volatile-highlights vmd-mode vi-tilde-fringe valign uuidgen use-package unicode-fonts unfill undo-tree underwater-theme ujelly-theme typit twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toc-org terminal-here tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunshine sunny-day-theme sudoku sublime-themes subatomic256-theme subatomic-theme string-inflection spotify sphinx-doc spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme reverse-theme reveal-in-osx-finder restclient-helm restart-emacs rebecca-theme rase rainbow-delimiters railscasts-theme pytest pyim pyenv-mode py-isort purple-haze-theme professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox pangu-spacing pacmacs ox-hugo ox-gfm overseer osx-trash osx-location osx-dictionary osx-clipboard orgit organic-green-theme org-trello org-superstar org-sticky-header org-rich-yank org-projectile org-present org-pomodoro org-mime org-journal org-download org-cliplink org-brain open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http nord-theme noctilux-theme naquadah-theme nameless mwim mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme mmm-mode minimal-theme material-theme markdown-toc majapahit-theme magit-svn magit-section magit-gitflow madhat2r-theme macrostep lush-theme lsp-ui lsp-python-ms lsp-pyright lsp-origami lorem-ipsum live-py-mode link-hint light-soap-theme launchctl kaolin-themes json-navigator jinja2-mode jbeans-theme jazz-theme ir-black-theme inkpot-theme indent-guide importmagic hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-spotify-plus helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-snippets go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gmail-message-mode gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gh-md gandalf-theme fuzzy forge font-lock+ flymd flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme find-by-pinyin-dired farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig edit-server dumb-jump dracula-theme dotenv-mode doom-themes dockerfile-mode docker django-theme dired-quick-sort diminish devdocs darktooth-theme darkokai-theme darkmine-theme darkburn-theme dap-mode dakrone-theme cython-mode cyberpunk-theme company-statistics company-restclient company-quickhelp company-go company-box company-ansible company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clean-aindent-mode chocolate-theme chinese-conv cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme browse-at-remote bm blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile atom-one-dark-theme apropospriate-theme anti-zenburn-theme ansible-doc ansible ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-pinyin ace-link ace-jump-helm-line ac-ispell 2048-game)))
+   '(toml-mode ron-mode racer flycheck-rust cargo rust-mode rainbow-fart zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify vterm volatile-highlights vmd-mode vi-tilde-fringe valign uuidgen use-package unicode-fonts unfill undo-tree underwater-theme ujelly-theme typit twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toc-org terminal-here tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunshine sunny-day-theme sudoku sublime-themes subatomic256-theme subatomic-theme string-inflection spotify sphinx-doc spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme reverse-theme reveal-in-osx-finder restclient-helm restart-emacs rebecca-theme rase rainbow-delimiters railscasts-theme pytest pyim pyenv-mode py-isort purple-haze-theme professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox pangu-spacing pacmacs ox-hugo ox-gfm overseer osx-trash osx-location osx-dictionary osx-clipboard orgit organic-green-theme org-trello org-superstar org-sticky-header org-rich-yank org-projectile org-present org-pomodoro org-mime org-journal org-download org-cliplink org-brain open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http nord-theme noctilux-theme naquadah-theme nameless mwim mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme mmm-mode minimal-theme material-theme markdown-toc majapahit-theme magit-svn magit-section magit-gitflow madhat2r-theme macrostep lush-theme lsp-ui lsp-python-ms lsp-pyright lsp-origami lorem-ipsum live-py-mode link-hint light-soap-theme launchctl kaolin-themes json-navigator jinja2-mode jbeans-theme jazz-theme ir-black-theme inkpot-theme indent-guide importmagic hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-spotify-plus helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-snippets go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gmail-message-mode gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gh-md gandalf-theme fuzzy forge font-lock+ flymd flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme find-by-pinyin-dired farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig edit-server dumb-jump dracula-theme dotenv-mode doom-themes dockerfile-mode docker django-theme dired-quick-sort diminish devdocs darktooth-theme darkokai-theme darkmine-theme darkburn-theme dap-mode dakrone-theme cython-mode cyberpunk-theme company-statistics company-restclient company-quickhelp company-go company-box company-ansible company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clean-aindent-mode chocolate-theme chinese-conv cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme browse-at-remote bm blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile atom-one-dark-theme apropospriate-theme anti-zenburn-theme ansible-doc ansible ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-pinyin ace-link ace-jump-helm-line ac-ispell 2048-game))
+ '(warning-suppress-types '((use-package) (use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
