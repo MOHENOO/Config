@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
              ;; python-format-on-save t
              ;; python-backend 'anaconda
              python-formatter 'yapf
-             python-sort-imports-on-save t)
+             python-sort-imports-on-save nil)
      tmux
      (json :variables
            json-fmt-tool 'web-beautify

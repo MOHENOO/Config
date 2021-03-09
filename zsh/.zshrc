@@ -31,9 +31,6 @@ zinit snippet OMZ::plugins/extract/extract.plugin.zsh
 zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
-# OSX
-zinit ice svn
-zinit snippet OMZ::plugins/osx
 
 zinit light zsh-users/zsh-history-substring-search
 bindkey '^[[A' history-substring-search-up
@@ -124,8 +121,9 @@ alias tmux="tmux -u"
 alias ll="exa -alig --icons"
 alias ls="exa --icons"
 alias vim=nvim
-# alias cat=bat
+alias cat="bat --paging=never --plain"
 alias ssh=zssh
+alias ofd='open_command $PWD'
 
 ####################################### export ###############################################
 # set language
@@ -141,11 +139,12 @@ fi
 # eval $(thefuck --alias)
 export GOPATH=$HOME/Development/go
 export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$PATH:/Users/mohenoo/.asdf/installs/nodejs/15.2.0/.npm/bin
+export NODEPATH="~/.asdf/installs/nodejs/15.2.0/.npm/bin"
+export PATH=$GOBIN:$NODEPATH:$PATH
 # openssl
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 export LDFLAGS=-L/usr/local/opt/openssl/lib
 export CPPFLAGS=-I/usr/local/opt/openssl/include
 export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 
-
+export BAT_THEME="Nord"
