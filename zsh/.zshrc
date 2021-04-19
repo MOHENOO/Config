@@ -10,7 +10,6 @@ autoload -Uz _zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-
 # OMZ snippet
 zinit snippet OMZ::lib/key-bindings.zsh
 zinit snippet OMZ::lib/history.zsh
@@ -39,12 +38,12 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # zinit snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
-# zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
 # zinit snippet OMZ::plugins/minikube/minikube.plugin.zsh
 
 
 zinit light greymd/tmux-xpanes
-zinit light supercrabtree/k
+# zinit light supercrabtree/k
 zinit light MichaelAquilina/zsh-you-should-use
 zinit light mafredri/zsh-async
 
@@ -101,9 +100,6 @@ zinit pack"default+keys" for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-
 # >>>> Vagrant command completion (start)
 fpath=(/opt/vagrant/embedded/gems/2.2.14/gems/vagrant-2.2.14/contrib/zsh $fpath)
 # <<<<  Vagrant command completion (end)
@@ -118,10 +114,10 @@ kitty + complete setup zsh | source /dev/stdin
 ####################################### alias ############################################
 alias ec='emacsclient -t -a ""'
 alias tmux="tmux -u"
-alias ll="exa -alig --icons"
+alias ll="exa -alig --icons --git"
 alias ls="exa --icons"
 alias vim=nvim
-alias cat="bat --paging=never --plain"
+alias cat="bat -p --paging never"
 alias ssh=zssh
 alias ofd='open_command $PWD'
 
@@ -137,14 +133,15 @@ else
 fi
 
 # eval $(thefuck --alias)
+asdf reshim nodejs 15.2.0
 export GOPATH=$HOME/Development/go
 export GOBIN=$GOPATH/bin
-export NODEPATH="~/.asdf/installs/nodejs/15.2.0/.npm/bin"
-export PATH=$GOBIN:$NODEPATH:$PATH
+export PATH=$GOBIN:$PATH
 # openssl
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 export LDFLAGS=-L/usr/local/opt/openssl/lib
 export CPPFLAGS=-I/usr/local/opt/openssl/include
 export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 
-export BAT_THEME="Nord"
+export BAT_THEME="OneHalfDark"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
