@@ -47,7 +47,6 @@ This function should only modify configuration layer settings."
           lsp-ui-doc-enable nil
           lsp-enable-semantic-highlighting t
           lsp-file-watch-threshold 10000)
-     games
      (python :variables
              python-backend 'lsp
              python-lsp-server 'pyright
@@ -57,7 +56,7 @@ This function should only modify configuration layer settings."
              python-sort-imports-on-save nil)
      tmux
      (json :variables
-           json-fmt-tool 'web-beautify
+           json-fmt-tool 'prettier
            json-fmt-on-save t
            json-backend 'lsp)
      (go :variables
@@ -80,42 +79,38 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t)
      better-defaults
-     emacs-lisp
      git
-     chrome
      (restclient :variables
                  restclient-use-org t)
      dap
      (docker :variables
              docker-dockerfile-backend 'lsp)
      (markdown :variables
-               markdown-live-preview-engine 'vmd
+               markdown-live-preview-engine 'eww
                markdown-mmm-auto-modes '("c" "c++" "python" "go" ("elisp" "emacs-lisp")))
      (org :variables
           org-enable-github-support t
-          org-enable-hugo-support t
-          org-enable-trello-support t
           org-enable-sticky-header t
           org-enable-org-journal-support t)
-
      ansible
      (yaml :variables
            yaml-enable-lsp t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; spell-checking
-     themes-megapack
+     spell-checking
      osx
      chinese
      spotify
      multiple-cursors
      (treemacs :variables
                treemacs-use-follow-mode t
+               treemacs-use-scope-type 'Perspectives.
                treemacs-use-git-mode 'deferred
+               treemacs-use-icons-dired nil
                treemacs-collapse-dirs 3
-               treemacs-lock-width t
-               treemacs-use-all-the-icons-theme t
+               ;; treemacs-lock-width t
+               ;; treemacs-use-all-the-icons-theme t
                treemacs-use-filewatch-mode t)
      (unicode-fonts :variables
                     unicode-fonts-force-multi-color-on-mac t
@@ -137,9 +132,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(atom-one-dark-theme
-                                      go-snippets
-                                      nord-theme)
+   dotspacemacs-additional-packages '(go-snippets)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -290,8 +283,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(atom-one-dark
-                         nord
+   dotspacemacs-themes '(doom-one
                          spacemacs-dark
                          spacemacs-light)
 
@@ -302,7 +294,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(vim-powerline)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -373,7 +365,7 @@ It should only modify the values of Spacemacs settings."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'cache
+   dotspacemacs-auto-save-file-location 'original
 
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
@@ -494,7 +486,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server nil
+   dotspacemacs-enable-server t
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
@@ -546,7 +538,7 @@ It should only modify the values of Spacemacs settings."
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup trailing
 
    ;; If non nil activate `clean-aindent-mode' which tries to correct
    ;; virtual indentation of simple modes. This can interfer with mode specific
@@ -611,6 +603,16 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (xterm-mouse-mode -1)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+  ;; (setq doom-themes-treemacs-theme "doom-atom") ; use the colorful treemacs theme
+  (doom-themes-treemacs-config)
+  ;; ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config)
   (setq-default dotspacemacs-persistent-server t)
   (setq-default dotspacemacs-server-socket-dir "~/.emacs/server")
   (setq-default display-time-mode 1)
@@ -670,7 +672,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
+   '("fce3524887a0994f8b9b047aef9cc4cc017c5a93a5fb1f84d300391fba313743" "8f5a7a9a3c510ef9cbb88e600c0b4c53cdcdb502cfe3eb50040b7e13c6f4e78e" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    '(atom-one-dark-theme zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify vterm volatile-highlights vmd-mode vi-tilde-fringe uuidgen use-package unicode-fonts unfill undo-tree underwater-theme ujelly-theme typit twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toml-mode toc-org terminal-here tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunshine sunny-day-theme sudoku sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit spotify sphinx-doc spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme ron-mode reverse-theme reveal-in-osx-finder restclient-helm restart-emacs rebecca-theme rase rainbow-delimiters railscasts-theme racer pytest pyim pyenv-mode py-isort purple-haze-theme professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox pangu-spacing pacmacs ox-hugo ox-gfm overseer osx-trash osx-location osx-dictionary osx-clipboard orgit-forge organic-green-theme org-trello org-superstar org-sticky-header org-rich-yank org-projectile org-present org-pomodoro org-mime org-journal org-download org-cliplink org-brain open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http nose nord-theme noctilux-theme naquadah-theme nameless mwim mustang-theme multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme mmm-mode minimal-theme material-theme markdown-toc majapahit-theme magit-svn magit-section magit-gitflow madhat2r-theme macrostep lush-theme lsp-ui lsp-python-ms lsp-pyright lsp-origami lorem-ipsum live-py-mode link-hint light-soap-theme launchctl kaolin-themes json-navigator jinja2-mode jbeans-theme jazz-theme ir-black-theme inkpot-theme indent-guide importmagic hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-spotify-plus helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-snippets go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gmail-message-mode gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gh-md gandalf-theme fuzzy font-lock+ flymd flycheck-rust flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme find-by-pinyin-dired farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig edit-server dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes dockerfile-mode docker django-theme dired-quick-sort diminish devdocs darktooth-theme darkokai-theme darkmine-theme darkburn-theme dap-mode dakrone-theme cython-mode cyberpunk-theme company-statistics company-restclient company-quickhelp company-go company-box company-ansible company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clean-aindent-mode chocolate-theme chinese-conv cherry-blossom-theme centered-cursor-mode cargo busybee-theme bubbleberry-theme browse-at-remote bm blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile apropospriate-theme anti-zenburn-theme ansible-doc ansible ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-pinyin ace-link ace-jump-helm-line ac-ispell 2048-game))
