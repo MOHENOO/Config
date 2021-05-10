@@ -1,0 +1,27 @@
+#+TITLE:   My doom emacs tourist
+#+DATE:    May 9, 2021
+#+SINCE:   <replace with next tagged release version>
+#+STARTUP: inlineimages nofold
+
+* Table of Contents :TOC_3:noexport:
+- [[#getting-started][Getting Started]]
+  - [[#install][Install]]
+  - [[#files][Files]]
+
+* Getting Started
+
+** Install
+
+#+BEGIN_SRC shell
+git clone -b develop --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+~/.emacs.d/bin/doom doctor
+M-x all-the-icons-install-fonts
+#+END_SRC
+
+** Files
+| keymap  | function            |
+|---------+---------------------|
+| SPC-f-f | find-file           |
+| SPC-f-F | find-file-from-hear |
+|         |                     |
