@@ -22,6 +22,8 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 12 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 13))
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -54,6 +56,10 @@
 ;; When on an empty item or table row, abort or split the item list or table.
 ;; When on a non-empty item or table row, continue the item list or table.
 ;; Otherwise, insert a newline and indent.
+
+;; evil setting
+(setq evil-split-window-below t)
+(setq evil-vsplit-window-right t)
 
 ;; unicode-font
 (setq doom-unicode-font doom-font)

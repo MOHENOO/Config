@@ -16,7 +16,13 @@
 git clone -b develop --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
 ~/.emacs.d/bin/doom doctor
-M-x all-the-icons-install-fonts
+rm -rf ~/.doom.d
+ln -sf ~/Github/Config/doomemacs ~/.doom.d
+~/.emacs.d/bin/doom sync
+npm install -g dockerfile-language-server-nodejs
+brew install ripgrep wordnet
+# brew install libvterm cmake
+# M-x vterm-module-compile
 #+END_SRC
 
 ** Files
