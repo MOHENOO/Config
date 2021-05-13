@@ -6,6 +6,7 @@
 * Table of Contents :TOC_3:noexport:
 - [[#getting-started][Getting Started]]
   - [[#install][Install]]
+  - [[#project][Project]]
   - [[#files][Files]]
 
 * Getting Started
@@ -25,9 +26,25 @@ brew install ripgrep wordnet
 # M-x vterm-module-compile
 #+END_SRC
 
+** Project
+
+#+BEGIN_SRC shell
+# add all git dir to project
+M-x projectile-discover-projects-in-directory
+#+END_SRC
+
+| keymap  | function        |
+|---------+-----------------|
+| SPC-p-p | switch-project  |
+| SPC-o-p | project-sidebar |
+
 ** Files
-| keymap  | function            |
-|---------+---------------------|
-| SPC-f-f | find-file           |
-| SPC-f-F | find-file-from-hear |
-|         |                     |
+| keymap          | function                 |
+|-----------------+--------------------------|
+| SPC-SPC         | find-file-in-project     |
+| SPC-f-f/SPC-dot | find-file                |
+| SPC-f-F         | find-file-from-hear      |
+| SPC-f-p         | find-file-private-config |
+| SPC-f-r         | Recent files             |
+| SPC-b-b         | switch-workspace-buffer  |
+| SPC-b-B         | switch-buffer            |

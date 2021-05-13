@@ -112,7 +112,8 @@ compinit
 kitty + complete setup zsh | source /dev/stdin
 
 ####################################### alias ############################################
-alias ec='emacsclient -t -a ""'
+# alias ec='emacsclient -t -a ""'
+alias ec='emacs -nw'
 alias tmux="tmux -u"
 alias ll="exa -alig --icons --git"
 alias ls="exa --icons"
@@ -137,6 +138,7 @@ asdf reshim nodejs 15.2.0
 export GOPATH=$HOME/Development/go
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
+export PATH=$HOME/.emacs.d/bin:$PATH
 # openssl
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 export LDFLAGS=-L/usr/local/opt/openssl/lib
