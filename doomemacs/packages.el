@@ -50,3 +50,4 @@
 ;(unpin! t)
 (package! tmux-pane)
 (package! rainbow-fart)
+(package! org-super-agenda)

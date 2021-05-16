@@ -56,13 +56,16 @@
 ;; When on an empty item or table row, abort or split the item list or table.
 ;; When on a non-empty item or table row, continue the item list or table.
 ;; Otherwise, insert a newline and indent.
+;;
+(setq mac-right-option-modifier 'meta)
+
 
 ;; evil setting
 (setq evil-split-window-below t)
 (setq evil-vsplit-window-right t)
 (setq evil-snipe-override-evil-repeat-keys nil)
-(setq doom-localleader-key ",")
-(setq doom-localleader-alt-key "M-,")
+;; (setq doom-localleader-key ",")
+;; (setq doom-localleader-alt-key "M-,")
 
 ;; unicode-font
 (setq doom-unicode-font doom-font)
@@ -88,11 +91,38 @@
           :desc "hpane" :nv "h" #'tmux-pane-toggle-horizontal)
   )
 )
+;; (use-package! rainbow-fart
+;;   :config
+;;   (rainbow-fart-mode)
+;;   (setq rainbow-fart-keyword-interval nil)
+;;   (setq rainbow-fart-voice-model "Yukinoshita Yukino")
+;; )
 
 (use-package rainbow-fart
-  ;; :ensure t
+  :ensure t
   :init (rainbow-fart-mode 1))
+(setq rainbow-fart-keyword-interval nil)
+(setq rainbow-fart-voice-model "Yukinoshita Yukino")
+
+;; (use-package rainbow-fart
+;;   :ensure t
+;;   :init (rainbow-fart-mode 1))
 ;; (setq rainbow-fart-voice-model "JustKowalski")
+
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (setq org-super-agenda-groups '(
+        ;; Each group has an implicit boolean OR operator between its selectors.
+        (:name "Today"  ; Optionally specify section name
+                :time-grid t  ; Items that appear on the time grid
+                :todo "TODAY")  ; Items that have this TODO keyword
+        (:name "Important"
+                ;; Single arguments given alone
+                :tag "bills"
+                :priority "A")))
+        :config
+        (org-super-agenda-mode))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!

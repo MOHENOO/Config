@@ -8,6 +8,9 @@
   - [[#install][Install]]
   - [[#project][Project]]
   - [[#files][Files]]
+  - [[#evil-snipe][evil-snipe]]
+  - [[#avy][avy]]
+  - [[#evil-multiedit][evil-multiedit]]
 
 * Getting Started
 
@@ -22,8 +25,6 @@ ln -sf ~/Github/Config/doomemacs ~/.doom.d
 ~/.emacs.d/bin/doom sync
 npm install -g dockerfile-language-server-nodejs
 brew install ripgrep wordnet
-# brew install libvterm cmake
-# M-x vterm-module-compile
 #+END_SRC
 
 ** Project
@@ -48,3 +49,31 @@ M-x projectile-discover-projects-in-directory
 | SPC-f-r         | Recent files             |
 | SPC-b-b         | switch-workspace-buffer  |
 | SPC-b-B         | switch-buffer            |
+| SPC-w-s(vs)     | evil-window-split        |
+| SPC-w-v         | evil-window-vsplit       |
+
+** evil-snipe
+| keymap | function     |
+|--------+--------------|
+| f      | evil-snipe-f |
+| F      | evil-snipe-F |
+| t      | evil-snipe-t |
+| T      | evil-snipe-T |
+| s      | evil-snipe-s |
+| S      | evil-snipe-S |
+| ,      | prev         |
+| ;      | next         |
+
+** avy
+| keymap  | function   |
+|---------+------------|
+| g-s-SPC | avy-lambda |
+
+** evil-multiedit
+
+| keymap | function                      |
+|--------+-------------------------------|
+| M-d    | evil-multiedit-match-and-next |
+| M-D    | evil-multiedit-match-and-prev |
+| Ctrl-n | evil-multiedit-next           |
+| Ctrl-p | evil-multiedit-prev           |
