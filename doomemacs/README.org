@@ -13,6 +13,7 @@
   - [[#evil-multiedit][Evil-multiedit]]
   - [[#dired][Dired]]
   - [[#org-mode][Org-mode]]
+  - [[#magit][Magit]]
 
 * Getting Started
 
@@ -121,3 +122,8 @@ M-x projectile-discover-projects-in-directory
 | SPC-m-q       | org-set-tags-command          |
 | SPC-m-s-s     | org-sparse-tree               |
 | SPC-m-A       | org-archive-tree              |
+
+** Magit
+| keymap  | function     |
+|---------+--------------|
+| SPC-g-g | magit-status |
