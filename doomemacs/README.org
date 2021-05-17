@@ -8,9 +8,11 @@
   - [[#install][Install]]
   - [[#project][Project]]
   - [[#files][Files]]
-  - [[#evil-snipe][evil-snipe]]
-  - [[#avy][avy]]
-  - [[#evil-multiedit][evil-multiedit]]
+  - [[#evil-snipe][Evil-snipe]]
+  - [[#avy][Avy]]
+  - [[#evil-multiedit][Evil-multiedit]]
+  - [[#dired][Dired]]
+  - [[#org-mode][Org-mode]]
 
 * Getting Started
 
@@ -52,7 +54,7 @@ M-x projectile-discover-projects-in-directory
 | SPC-w-s(vs)     | evil-window-split        |
 | SPC-w-v         | evil-window-vsplit       |
 
-** evil-snipe
+** Evil-snipe
 | keymap | function     |
 |--------+--------------|
 | f      | evil-snipe-f |
@@ -64,12 +66,12 @@ M-x projectile-discover-projects-in-directory
 | ,      | prev         |
 | ;      | next         |
 
-** avy
+** Avy
 | keymap  | function   |
 |---------+------------|
 | g-s-SPC | avy-lambda |
 
-** evil-multiedit
+** Evil-multiedit
 
 | keymap | function                      |
 |--------+-------------------------------|
@@ -77,3 +79,45 @@ M-x projectile-discover-projects-in-directory
 | M-D    | evil-multiedit-match-and-prev |
 | Ctrl-n | evil-multiedit-next           |
 | Ctrl-p | evil-multiedit-prev           |
+
+** Dired
+| keymap | function               |
+|--------+------------------------|
+| h      | ranger-up-directory    |
+| l      | ranger-down-directory  |
+| j      | ranger-next-file       |
+| k      | ranger-prev-file       |
+| q      | quit-window            |
+| f      | find-file              |
+| yy     | ranger-copy            |
+| pp     | ranger-paste           |
+| D      | dired-do-delete        |
+| dd     | ranger-cut             |
+| =      | dired-diff             |
+
+** Org-mode
+| keymap        | function                      |
+|---------------+-------------------------------|
+| tab           | org-cycle                     |
+| ctrl-return   | org/insert-item-above         |
+| ctrl-S-return | org/insert-item-below         |
+| M-j           | org-metadown                  |
+| M-k           | org-metaup                    |
+| M-h/<<        | org-metaleft                  |
+| M-k/>>        | org-metaright                 |
+| SPC-m-l-l     | org-insert-link               |
+| SPC-m-l-s     | org-store-link                |
+| SPC-m-'       | org-edit-special              |
+| <s-tab        |                               |
+| C-c C-c       |                               |
+| C-c C-,       | org-insert-structure-template |
+| SPC-m-t       | org-todo                      |
+| SPC-m-T       | org-todo-list                 |
+| S-left        | org-todo-cycle-prev           |
+| S-right       | org-todo-cycle-next           |
+| SPC-o-A       | org-agenda                    |
+| SPC-X         | org-capture                   |
+| SPC-m-p-p     | org-priority                  |
+| SPC-m-q       | org-set-tags-command          |
+| SPC-m-s-s     | org-sparse-tree               |
+| SPC-m-A       | org-archive-tree              |

@@ -71,7 +71,7 @@
 (setq doom-unicode-font doom-font)
 
 ;; project
-(setq projectile-project-search-path '("~/Github/","~/Work/","~/Work/Trove/Redis"))
+(setq projectile-project-search-path '("~/Github/" "~/Work/" "~/Work/Trove/Redis" "~/Work/Trove/InfluxDB" "~/Work/Trove/MongoDB" "~/Work/Trove/Rabbitmq"))
 
 ;; tmux
 (use-package! tmux-pane
@@ -126,10 +126,11 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
 
 (after! org
   ;; use ctrl-a ctrl-e as home and end in org mode.
+  (setq org-directory "~/org/")
+  (setq org-link-search-must-match-exact-headline nil)
   (setq org-special-ctrl-a/e t)
   (setq org-agenda-files '("~/org"))
   (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
