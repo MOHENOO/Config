@@ -122,6 +122,10 @@ M-x projectile-discover-projects-in-directory
 | SPC-m-q       | org-set-tags-command          |
 | SPC-m-s-s     | org-sparse-tree               |
 | SPC-m-A       | org-archive-tree              |
+| SPC-n-j-j     | org-journal                   |
+| SPC-n-r-c     | org-roam-capture              |
+| SPC-n-r-r     | org-roam                      |
+| SPC-n-r-i     | org-roam-insert               |
 
 ** Magit
 | keymap  | function     |
