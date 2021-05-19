@@ -104,6 +104,10 @@
 (setq rainbow-fart-keyword-interval nil)
 (setq rainbow-fart-voice-model "Yukinoshita Yukino")
 
+(setq deft-directory "~/org/"
+      deft-extensions '("org" "txt")
+      deft-recursive t)
+
 ;; (use-package rainbow-fart
 ;;   :ensure t
 ;;   :init (rainbow-fart-mode 1))
