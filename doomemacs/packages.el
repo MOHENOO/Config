@@ -49,5 +49,4 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! tmux-pane)
-(package! rainbow-fart)
-(package! org-super-agenda)
+; (package! org-super-agenda)

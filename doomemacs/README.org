@@ -26,8 +26,13 @@ git clone -b develop --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 rm -rf ~/.doom.d
 ln -sf ~/Github/Config/doomemacs ~/.doom.d
 ~/.emacs.d/bin/doom sync
-npm install -g dockerfile-language-server-nodejs
 brew install ripgrep wordnet
+# docker
+npm install -g dockerfile-language-server-nodejs
+# common-lisp
+brew install sbcl
+# c
+brew install glslang
 #+END_SRC
 
 ** Project

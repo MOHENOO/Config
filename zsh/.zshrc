@@ -135,6 +135,7 @@ fi
 
 # eval $(thefuck --alias)
 asdf reshim nodejs 15.2.0
+export PYTHONPATH=$HOME/.asdf/shims/python
 export GOPATH=$HOME/Development/go
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH

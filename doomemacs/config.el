@@ -32,7 +32,12 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type `relative)
+;; (+global-word-wrap-mode +1)
+(setq +format-on-save-enabled-modes
+      '(not python-mode))
 
+(after! rustic
+  (setq rustic-lsp-server 'rls))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -97,13 +102,6 @@
 ;;   (setq rainbow-fart-keyword-interval nil)
 ;;   (setq rainbow-fart-voice-model "Yukinoshita Yukino")
 ;; )
-
-(use-package rainbow-fart
-  :ensure t
-  :init (rainbow-fart-mode 1))
-(setq rainbow-fart-keyword-interval nil)
-(setq rainbow-fart-voice-model "Yukinoshita Yukino")
-
 (setq deft-directory "~/org/"
       deft-extensions '("org" "txt")
       deft-recursive t)
@@ -113,20 +111,20 @@
 ;;   :init (rainbow-fart-mode 1))
 ;; (setq rainbow-fart-voice-model "JustKowalski")
 
-(use-package! org-super-agenda
-  :after org-agenda
-  :init
-  (setq org-super-agenda-groups '(
-        ;; Each group has an implicit boolean OR operator between its selectors.
-        (:name "Today"  ; Optionally specify section name
-                :time-grid t  ; Items that appear on the time grid
-                :todo "TODAY")  ; Items that have this TODO keyword
-        (:name "Important"
-                ;; Single arguments given alone
-                :tag "bills"
-                :priority "A")))
-        :config
-        (org-super-agenda-mode))
+; (use-package! org-super-agenda
+;   :after org-agenda
+;   :init
+;   (setq org-super-agenda-groups '(
+;         ;; Each group has an implicit boolean OR operator between its selectors.
+;         (:name "Today"  ; Optionally specify section name
+;                 :time-grid t  ; Items that appear on the time grid
+;                 :todo "TODAY")  ; Items that have this TODO keyword
+;         (:name "Important"
+;                 ;; Single arguments given alone
+;                 :tag "bills"
+;                 :priority "A")))
+;         :config
+;         (org-super-agenda-mode))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
