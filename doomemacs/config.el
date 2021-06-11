@@ -27,12 +27,12 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'nord)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type `relative)
-;; (+global-word-wrap-mode +1)
+(+global-word-wrap-mode +1)
 (setq +format-on-save-enabled-modes
       '(not python-mode))
 
@@ -69,14 +69,18 @@
 (setq evil-split-window-below t)
 (setq evil-vsplit-window-right t)
 (setq evil-snipe-override-evil-repeat-keys nil)
-;; (setq doom-localleader-key ",")
-;; (setq doom-localleader-alt-key "M-,")
 
 ;; unicode-font
 (setq doom-unicode-font doom-font)
 
 ;; project
 (setq projectile-project-search-path '("~/Github/" "~/Work/" "~/Work/Trove/Redis" "~/Work/Trove/InfluxDB" "~/Work/Trove/MongoDB" "~/Work/Trove/Rabbitmq"))
+(map! :after ccls
+      :map (c-mode-map c++-mode-map)
+      :n "C-h" #'tmux-pane-omni-window-left
+      :n "C-j" #'tmux-pane-omni-window-down
+      :n "C-k" #'tmux-pane-omni-window-up
+      :n "C-l" #'tmux-pane-omni-window-right)
 
 ;; tmux
 (use-package! tmux-pane
@@ -96,38 +100,10 @@
           :desc "hpane" :nv "h" #'tmux-pane-toggle-horizontal)
   )
 )
-;; (use-package! rainbow-fart
-;;   :config
-;;   (rainbow-fart-mode)
-;;   (setq rainbow-fart-keyword-interval nil)
-;;   (setq rainbow-fart-voice-model "Yukinoshita Yukino")
-;; )
+
 (setq deft-directory "~/org/"
       deft-extensions '("org" "txt")
       deft-recursive t)
-
-;; (use-package rainbow-fart
-;;   :ensure t
-;;   :init (rainbow-fart-mode 1))
-;; (setq rainbow-fart-voice-model "JustKowalski")
-
-; (use-package! org-super-agenda
-;   :after org-agenda
-;   :init
-;   (setq org-super-agenda-groups '(
-;         ;; Each group has an implicit boolean OR operator between its selectors.
-;         (:name "Today"  ; Optionally specify section name
-;                 :time-grid t  ; Items that appear on the time grid
-;                 :todo "TODAY")  ; Items that have this TODO keyword
-;         (:name "Important"
-;                 ;; Single arguments given alone
-;                 :tag "bills"
-;                 :priority "A")))
-;         :config
-;         (org-super-agenda-mode))
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
 
 (after! org
   ;; use ctrl-a ctrl-e as home and end in org mode.
