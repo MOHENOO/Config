@@ -129,3 +129,4 @@
       org-journal-file-format "%Y-%m-%d.org")
 
 (setq org-roam-directory "~/org/roam")
+(setq org-journal-file-type 'weekly)

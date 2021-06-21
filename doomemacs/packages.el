@@ -50,4 +50,3 @@
 ;(unpin! t)
 (package! tmux-pane)
 (package! nord-theme)
-; (package! org-super-agenda)
